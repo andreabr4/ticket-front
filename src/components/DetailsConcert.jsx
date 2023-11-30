@@ -1,9 +1,9 @@
 import LeafletMap from "./LeafletMap";
-import { useState, useContext } from "react";
+import { useState, useContext, useMemo, useCallback } from "react";
 import UserContext from "../UserContext";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useNavigate } from "react-router-dom";
-import { format } from 'date-fns';
+import { format } from "date-fns";
 
 function DetailsConcert() {
   const { concertContext } = useContext(UserContext);
@@ -12,6 +12,12 @@ function DetailsConcert() {
   const { token } = useContext(UserContext);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+
+  const calculateTotal = useCallback(() => {
+    return concertContext.price * ticketCount;
+  }, [concertContext.price, ticketCount]);
+
+  const total = useMemo(() => calculateTotal(), [calculateTotal]);
 
   const incrementTickets = () => {
     setTicketCount((prevCount) => prevCount + 1);
@@ -22,7 +28,7 @@ function DetailsConcert() {
   };
 
   const goToPayment = () => {
-    fetch("http://localhost:3000/order/create", {
+    fetch(process.env.DOMAIN+"/order/create", {
       method: "POST",
       body: JSON.stringify({
         email: loginUser.email,
@@ -55,8 +61,7 @@ function DetailsConcert() {
     );
   }
 
-  const formattedDate = format(new Date(concertContext.date), 'PPpp');
-
+  const formattedDate = format(new Date(concertContext.date), "PPpp");
 
   return (
     <>
@@ -69,23 +74,32 @@ function DetailsConcert() {
           src={concertContext.image}
           alt={`${concertContext.musician} concert`}
         />
-       
         <p className="mr-80 ml-80 mt-20 text-xl">
           {concertContext.description[i18n.language]}
         </p>
-        <h2 className="font-bold text-lg ml-80 mr-80 mt-20">{t("details_details")}</h2>
+        <h2 className="font-bold text-lg ml-80 mr-80 mt-20">
+          {t("details_details")}
+        </h2>
         <br></br>
         <p className="text-lg ml-80 mr-80 mt-2">
-        <p className="text-lg text-blue-700 font-bold mt-4">{t("details_place")}{" "}</p>
-        {concertContext.place.city + " (" + concertContext.place.country + ")"}
-        <br></br>
-        {t("details_date")} {formattedDate}
-        <br></br>
-        <p className="text-lg text-blue-700 font-bold mt-4">{t("details_price")}</p>{concertContext.price} €
-        <br></br>
+          <p className="text-lg text-blue-700 font-bold mt-4">
+            {t("details_place")}{" "}
+          </p>
+          {concertContext.place.city +
+            " (" +
+            concertContext.place.country +
+            ")"}
+          <br></br>
+          {t("details_date")} {formattedDate}
+          <br></br>
+          <p className="text-lg text-blue-700 font-bold mt-4">
+            {t("details_price")}
+          </p>
+          {concertContext.price} €<br></br>
         </p>
         <br></br>
-        <iframe className="text-center items-center ml-40"
+        <iframe
+          className="text-center items-center ml-40"
           src={`https://open.spotify.com/embed/artist/${concertContext.spotifyID}?utm_source=generator&theme=0`}
           width="75%"
           height="152"
@@ -96,23 +110,42 @@ function DetailsConcert() {
           <h2>{t("details_select_n_tickets")}</h2>
           <br></br>
           <div className="ticket-counter">
-            <button className="btn btn-square btn-sm mr-3 btn-secondary" 
-            onClick={decrementTickets} disabled={ticketCount <= 0}>
+            <button
+              className="btn btn-square btn-sm mr-3 btn-secondary"
+              onClick={decrementTickets}
+              disabled={ticketCount <= 0}
+            >
               -
             </button>
 
             <span className="font-bold"> {ticketCount} </span>
 
-            <button className="btn btn-square btn-sm ml-3 btn-secondary font-bold"
-            onClick={incrementTickets}>+</button>
+            <button
+              className="btn btn-square btn-sm ml-3 btn-secondary font-bold"
+              onClick={incrementTickets}
+              disabled={ticketCount>=10}
+            >
+              +
+            </button>
+
+          </div>
+          <div className="text font-normal mt-10">
+            <p>
+              {t("total_price")}: {total} €
+            </p>
           </div>
           <br></br>
           {loginUser === null ? (
-            <button className="btn btn-ghost btn-sm mb-20 font-bold"
-            disabled>{t("details_pay")}</button>
+            <button className="btn btn-ghost btn-sm mb-20 font-bold" disabled>
+              {t("details_pay")}
+            </button>
           ) : (
-            <button className="btn btn-primary btn-sm mb-20"
-            onClick={goToPayment}>{t("details_pay")}</button>
+            <button
+              className="btn btn-primary btn-sm mb-20"
+              onClick={goToPayment}
+            >
+              {t("details_pay")}
+            </button>
           )}
           <br></br>
           <LeafletMap

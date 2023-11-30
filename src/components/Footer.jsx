@@ -1,4 +1,5 @@
 import { useTranslation } from "react-i18next";
+import logoGray from "../../images/logoGray.png"
 
 function Footer() {
   const { t } = useTranslation();
@@ -15,7 +16,7 @@ function Footer() {
         </div>
         <div className="mb-10">
           <img
-            src="../../images/logoGray.png"
+            src={logoGray}
             className="h-20 w-auto"
             alt="Logo"
           />

@@ -21,7 +21,7 @@ export default function Signup() {
   function handleClick(e) {
     e.preventDefault();
 
-    fetch("http://localhost:3000/users/signup", {
+    fetch(process.env.DOMAIN+"/users/signup", {
       method: "POST",
       body: JSON.stringify({
         email: newUser.email,

@@ -12,12 +12,11 @@ function Login() {
 
   function handleClick(e) {
     e.preventDefault();
-    fetch("http://localhost:3000/login", {
+    fetch(process.env.DOMAIN+"/login", {
       method: "POST",
       body: JSON.stringify({
         email: user.email,
-        password: user.password,
-        name:user.name
+        password: user.password
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -29,7 +28,8 @@ function Login() {
       } else {
         res.json().then((data) => {
           setToken(data.access_token)
-          setLoginUser(data.user_name);
+          user.name = data.user_name
+          setLoginUser(user);
           navigate("/");
         });
       }

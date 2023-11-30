@@ -9,7 +9,7 @@ function GetConcerts() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    fetch("http://localhost:3000/concert/concerts")
+    fetch( process.env.DOMAIN+"/concert/concerts")
       .then((res) => res.json())
       .then((data) => {
         let newConcerts = [];
@@ -29,6 +29,7 @@ function GetConcerts() {
     navigate("/details");
   };
 
+
   return (
     <>
       <Carrusel></Carrusel>
@@ -41,7 +42,7 @@ function GetConcerts() {
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 ">
             {concerts.map((concert, i) => (
-              <li key={i} className="concert-item p-4">
+              <li key={i} className="flex flex-grow concert-item p-4">
                 <div className="card shadow-xl mb-10 items-center text-center">
                   <img
                     src={concert.image}

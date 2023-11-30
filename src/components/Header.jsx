@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserContext from "../UserContext";
 import { useTranslation } from "react-i18next";
-
+import logoWhite from "../../images/logoWhite.png"
 import LanguageSwitcher from "./Switcher";
 
 function Header() {
@@ -22,7 +22,7 @@ function Header() {
       <header className="navbar bg-base-100 bg-black">
         <div className="flex-1">
           <Link to="/">
-            <img src="../../images/logoWhite.png" className="w-40 h-auto"></img>
+            <img src={logoWhite} className="w-40 h-auto"></img>
           </Link>
         </div>
 
@@ -34,7 +34,7 @@ function Header() {
           {loginUser !== null ? (
             <>
               <span className="text-lg text-primary mr-5">
-                {t("welcome_message")}, {loginUser}
+                {t("welcome_message")}, {loginUser.name}
               </span>
             
               <span className="btn btn-sm btn-outline btn-primary mr-10" onClick={handleLogout}>
