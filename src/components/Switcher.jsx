@@ -18,11 +18,11 @@ function LanguageSwitcher() {
       </button>
       <button 
         onClick={() => changeLanguage('es')}
-        className="btn btn-square btn-xs btn-outline btn-primary"
+        className="btn btn-square btn-xs btn-outline btn-primary ml-5 mr-7"
       >
       ES
       </button>
-      ("""")
+
       {/* <button onClick={() => changeLanguage('eu')} className="...">Euskara</button> */}
     </div>
   );

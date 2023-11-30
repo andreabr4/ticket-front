@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext, useRef } from "react";
 
 import band1 from "../../images/band1.png";
+import band2 from "../../images/band2.png";
 import band3 from "../../images/band3.png";
 import band4 from "../../images/band4.png";
 import band5 from "../../images/band5.png";
 
 function Carrusel() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const carouselImages = [band1, band3, band4, band5];
+  const carouselImages = [band1, band2, band3, band4, band5];
   const extendedCarouselImages = [...carouselImages, ...carouselImages];
   const slideRef = useRef(null);
 
@@ -31,7 +32,7 @@ function Carrusel() {
   }, [currentSlide, extendedCarouselImages.length]);
 
   return (
-    <div className="overflow-hidden w-full h-64">
+    <div className="overflow-hidden w-full sm:h-48 md:h-64 lg:h-60">
       <div
         ref={slideRef}
         className="flex w-full"
@@ -46,8 +47,8 @@ function Carrusel() {
             <img
               src={image}
               alt={`Slide ${index}`}
-              className="w-full h-full object-cover"
-            />
+              className="w-full h-full object-cover" 
+              />
           </div>
         ))}
       </div>

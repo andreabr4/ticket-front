@@ -30,27 +30,27 @@ function Header() {
           <LanguageSwitcher></LanguageSwitcher>
         </div>
 
-        <div className="flex-none">
+        <div className="flex-none ml-5">
           {loginUser !== null ? (
             <>
-              <span className="text-lg">
-                {t("welcome_message")}, {loginUser.email}
-              </span>{" "}
-              |{" "}
-              <span className="btn btn-ghost" onClick={handleLogout}>
+              <span className="text-lg text-primary mr-5">
+                {t("welcome_message")}, {loginUser}
+              </span>
+            
+              <span className="btn btn-sm btn-outline btn-primary mr-10" onClick={handleLogout}>
                 {t("log_out")}
               </span>
             </>
           ) : (
-            <div>
+            <div className="mr-5">
               <Link to="/login" className="btn btn-neutral">
                 {t("log_in")}
               </Link>
-              ("")
-              <Link to="/signup" className="btn btn-primary">
+          
+              <Link to="/signup" className="btn btn-primary mr-5 ml-5">
                 {t("sign_up")}
               </Link>
-              ("")
+          
             </div>
           )}
         </div>

@@ -3,6 +3,7 @@ import { useState, useContext } from "react";
 import UserContext from "../UserContext";
 import { useTranslation } from "react-i18next";
 import { Link, Navigate, useNavigate } from "react-router-dom";
+import { format } from 'date-fns';
 
 function DetailsConcert() {
   const { concertContext } = useContext(UserContext);
@@ -30,7 +31,7 @@ function DetailsConcert() {
         quantity: ticketCount,
       }),
       headers: {
-        Authorization: `${token}`,
+        Authorization: `Bearer ${token}`,
         "Content-type": "application/json; charset=UTF-8",
       },
     }).then((res) => {
@@ -54,50 +55,64 @@ function DetailsConcert() {
     );
   }
 
+  const formattedDate = format(new Date(concertContext.date), 'PPpp');
+
+
   return (
     <>
-      <div className="details-concert-container">
-        <h2>{concertContext.musician}</h2>
+      <div className="details-concert-container text-center items-center">
+        <h1 className="text-4xl font-bold mt-10 mb-10">
+          {concertContext.musician}
+        </h1>
         <img
+          className="mx-auto block max-w-5xl rounded-lg shadow-lg"
           src={concertContext.image}
           alt={`${concertContext.musician} concert`}
         />
-        <p>{concertContext.description[i18n.language]}</p>
-        <p>
-          {t("details_details")}
-          <br></br>
-          {t("details_place")}{" "}
-          {concertContext.place.city + "(" + concertContext.place.country + ")"}
-          <br></br>
-          {t("details_date")} {concertContext.date.toLocaleString()}
-          <br></br>
-          {t("details_price")} {concertContext.price} €<br></br>
-          <br></br>
-          <iframe
-            src={`https://open.spotify.com/embed/artist/${concertContext.spotifyID}?utm_source=generator&theme=0`}
-            width="75%"
-            height="152"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
-            loading="lazy"
-          ></iframe>{" "}
+       
+        <p className="mr-80 ml-80 mt-20 text-xl">
+          {concertContext.description[i18n.language]}
         </p>
-        <div>
+        <h2 className="font-bold text-lg ml-80 mr-80 mt-20">{t("details_details")}</h2>
+        <br></br>
+        <p className="text-lg ml-80 mr-80 mt-2">
+        <p className="text-lg text-blue-700 font-bold mt-4">{t("details_place")}{" "}</p>
+        {concertContext.place.city + " (" + concertContext.place.country + ")"}
+        <br></br>
+        {t("details_date")} {formattedDate}
+        <br></br>
+        <p className="text-lg text-blue-700 font-bold mt-4">{t("details_price")}</p>{concertContext.price} €
+        <br></br>
+        </p>
+        <br></br>
+        <iframe className="text-center items-center ml-40"
+          src={`https://open.spotify.com/embed/artist/${concertContext.spotifyID}?utm_source=generator&theme=0`}
+          width="75%"
+          height="152"
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture"
+          loading="lazy"
+        ></iframe>{" "}
+        <div className="text-center items-center font-bold mt-20">
           <h2>{t("details_select_n_tickets")}</h2>
           <br></br>
           <div className="ticket-counter">
-            <button onClick={decrementTickets} disabled={ticketCount <= 0}>
+            <button className="btn btn-square btn-sm mr-3 btn-secondary" 
+            onClick={decrementTickets} disabled={ticketCount <= 0}>
               -
             </button>
 
-            <span> {ticketCount} </span>
+            <span className="font-bold"> {ticketCount} </span>
 
-            <button onClick={incrementTickets}>+</button>
+            <button className="btn btn-square btn-sm ml-3 btn-secondary font-bold"
+            onClick={incrementTickets}>+</button>
           </div>
           <br></br>
           {loginUser === null ? (
-            <button disabled>{t("details_pay")}</button>
+            <button className="btn btn-ghost btn-sm mb-20 font-bold"
+            disabled>{t("details_pay")}</button>
           ) : (
-            <button onClick={goToPayment}>{t("details_pay")}</button>
+            <button className="btn btn-primary btn-sm mb-20"
+            onClick={goToPayment}>{t("details_pay")}</button>
           )}
           <br></br>
           <LeafletMap

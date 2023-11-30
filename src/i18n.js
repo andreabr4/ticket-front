@@ -5,16 +5,16 @@ const resources = {
   en: {
     translation: {
       "concerts": "Upcoming concerts",
-      "description": "Description: ",
       "concerts_not_selected": "There are no selected concerts",
       "go_back_concerts": "Find your concert!",
-      "details_details": "Details: ",
+      "details_details": "Details ",
       "details_place": "Place: ",
       "details_date": "Date and time: ",
       "details_price": "Ticket price: ",
       "details_pay":"Purchase",
       "details_select_n_tickets": "Choose number of tickets",
       "leaflet_location": "Enjoy your concert here",
+      "introduce_name_login":"Introduce your name",
       "introduce_email_login": "Introduce your email",
       "introduce_password_login": "Introduce your password",
       "btn_login": "Login",
@@ -35,22 +35,24 @@ const resources = {
       "introduce_email_signup": "Introduce your email",
       "introduce_password_signup": "Introduce your password", 
       "signup":"Sign up", 
-      "signup_to_login": "Already have a RowONE account?"
+      "signup_to_login": "Already have a RowONE account?", 
+      "contact_footer":"Contact with us:", 
+      "docu_footer":"Are you a developer? Find here our documentation"
     }
   },
   es: {
     translation: {
       "concerts": "Próximos conciertos",
-      "description": "Descripción: ",
       "concerts_not_selected": "No has seleccionado ningún concierto",
       "go_back_concerts": "¡Encuentra el concierto de tu vida!",
-      "details_details": "Detalles: ",
+      "details_details": "Detalles ",
       "details_place": "Lugar: ",
       "details_date": "Fecha y hora:",
       "details_price": "Precio: ",
       "details_pay":"Comprar",
       "details_select_n_tickets": "Selecciona número de entradas",
       "leaflet_location": "Disfruta de tu concierto aquí",
+      "introduce_name_login": "Introduce tu nombre",
       "introduce_email_login": "Introduce tu email",
       "introduce_password_login": "Introduce tu contraseña",
       "btn_login": "Acceder",
@@ -71,7 +73,9 @@ const resources = {
       "introduce_email_signup": "Introduce tu email",
       "introduce_password_signup": "Introduce tu contraseña", 
       "signup":"Regístrate", 
-      "signup_to_login": "¿Ya tienes una cuenta en RowONE? Inicia sesión"
+      "signup_to_login": "¿Ya tienes una cuenta en RowONE? Inicia sesión", 
+      "contact_footer":"Contacta con nosotros/as:", 
+      "docu_footer":"¿Eres desarrollador/a? Encuentra aquí nuestra documentación"
     }
   },
   eu: {

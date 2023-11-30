@@ -4,8 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 function Login() {
-  const [user, setUser] = useState({ email: "", password: "" });
-
+  const [user, setUser] = useState({ email: "", password: ""});
   const { loginUser, setLoginUser } = useContext(UserContext);
   const {token, setToken} = useContext(UserContext);
   const navigate = useNavigate();
@@ -18,6 +17,7 @@ function Login() {
       body: JSON.stringify({
         email: user.email,
         password: user.password,
+        name:user.name
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
@@ -29,7 +29,7 @@ function Login() {
       } else {
         res.json().then((data) => {
           setToken(data.access_token)
-          setLoginUser(user);
+          setLoginUser(data.user_name);
           navigate("/");
         });
       }
