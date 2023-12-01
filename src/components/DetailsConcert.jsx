@@ -131,7 +131,7 @@ function DetailsConcert() {
           </div>
           <div className="text font-normal mt-10">
             <p>
-              {t("total_price")}: {total} €
+              {t("total_price")} {total} €
             </p>
           </div>
           <br></br>
