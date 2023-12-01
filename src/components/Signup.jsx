@@ -21,7 +21,7 @@ export default function Signup() {
   function handleClick(e) {
     e.preventDefault();
 
-    fetch(process.env.DOMAIN+"/users/signup", {
+    fetch("https://p01--ticket-back--5y4264lh9kc4.code.run/users/signup", {
       method: "POST",
       body: JSON.stringify({
         email: newUser.email,

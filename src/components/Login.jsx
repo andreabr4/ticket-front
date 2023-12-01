@@ -12,7 +12,7 @@ function Login() {
 
   function handleClick(e) {
     e.preventDefault();
-    fetch(process.env.DOMAIN+"/login", {
+    fetch("https://p01--ticket-back--5y4264lh9kc4.code.run/login", {
       method: "POST",
       body: JSON.stringify({
         email: user.email,

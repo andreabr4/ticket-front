@@ -28,7 +28,7 @@ function DetailsConcert() {
   };
 
   const goToPayment = () => {
-    fetch(process.env.DOMAIN+"/order/create", {
+    fetch("https://p01--ticket-back--5y4264lh9kc4.code.run/order/create", {
       method: "POST",
       body: JSON.stringify({
         email: loginUser.email,

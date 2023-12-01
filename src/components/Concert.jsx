@@ -9,7 +9,7 @@ function GetConcerts() {
   const { t, i18n } = useTranslation();
 
   useEffect(() => {
-    fetch( process.env.DOMAIN+"/concert/concerts")
+    fetch( "https://p01--ticket-back--5y4264lh9kc4.code.run/concert/concerts")
       .then((res) => res.json())
       .then((data) => {
         let newConcerts = [];

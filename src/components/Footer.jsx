@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import logoGray from "../../images/logoGray.png"
 
+
 function Footer() {
   const { t } = useTranslation();
 
@@ -12,7 +13,7 @@ function Footer() {
           <a href="mailto:contacto@rowONE.com">contacto@rowONE.com</a>
         </div>
         <div className="mb-10 underline">
-          <a href="http://localhost:3000/docu">{t("docu_footer")}</a>
+          <a href={"https://p01--ticket-back--5y4264lh9kc4.code.run/docu"}>{t("docu_footer")}</a>
         </div>
         <div className="mb-10">
           <img
